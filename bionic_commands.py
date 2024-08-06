@@ -1,4 +1,5 @@
-"""Defines firmware commands for the bionic MyActuator motors."""
+"""Defines firmware commands for the bionic MyActuator motors.
+   Generates the CAN Message BODY (not including the CAN ID)"""
 
 import math
 import struct
