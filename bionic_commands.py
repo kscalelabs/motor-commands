@@ -37,7 +37,6 @@ def split_into_bytes(command: int, length: int = 8, little_endian: bool = True) 
 
 
 def set_position_control(
-    motor_id: int,  # NOTE: you need to specify the motor id as the CAN identifier
     position: float,
     motor_mode: int = 1,
     max_speed: float = 60.0,
@@ -45,6 +44,8 @@ def set_position_control(
     message_return: Literal[0, 1, 2, 3] = 0,
 ) -> List[int]:
     """Gets the command to set the position of a motor. Expect 8 bytes.
+        NOTE: you need to specify the motor id as the CAN identifier 
+        since it's not used in the message body
 
     Args:
         motor_id: The ID of the motor.
@@ -67,13 +68,14 @@ def set_position_control(
 
 
 def set_speed_control(
-    motor_id: int,  # NOTE: you need to specify the motor id as the CAN identifier
     speed: float,
     motor_mode: int = 2,
     current: float = 5.0,
     message_return: Literal[0, 1, 2, 3] = 0,
 ) -> List[int]:
     """Gets the command to set the speed of a motor. Expect 7 bytes.
+        NOTE: you need to specify the motor id as the CAN identifier 
+        since it's not used in the message body
 
     Args:
         motor_id: The ID of the motor.
@@ -95,13 +97,14 @@ def set_speed_control(
 
 
 def set_current_torque_control(
-    motor_id: int,  # NOTE: you need to specify the motor id as the CAN identifier
     value: int,
     control_status: Literal[0, 1, 2, 3, 4, 5, 6, 7] = 0,
     motor_mode: int = 3,
     message_return: Literal[0, 1, 2, 3] = 0,
 ) -> List[int]:
     """Gets the command to set the current OR torque of a motor. Expect 3 bytes.
+        NOTE: you need to specify the motor id as the CAN identifier 
+        since it's not used in the message body
 
     Args:
         motor_id: The ID of the motor.
@@ -125,6 +128,7 @@ def set_current_torque_control(
 
 def set_zero_position(motor_id: int) -> List[int]:
     """Gets the command to set the zero position of a motor. Expect 4 bytes.
+        NOTE: Motor ID is packed into the body. Use 0x7FF
 
     Args:
         motor_id: The ID of the motor.
@@ -149,9 +153,8 @@ def set_zero_position(motor_id: int) -> List[int]:
 
 def get_motor_pos() -> List[int]:
     """Gets the motor Position of a respective motor.
-
-    Args:
-        motor_id: The ID of the motor.
+        NOTE: you need to specify the motor id as the CAN identifier 
+        since it's not used in the message body
 
     Returns:
         The respective motor position
@@ -163,11 +166,10 @@ def get_motor_pos() -> List[int]:
     return split_into_bytes(command, 2)
 
 
-def get_motor_speed(motor_id: int) -> List[int]:
+def get_motor_speed() -> List[int]:
     """Gets the motor Position of a respective motor.
-
-    Args:
-        motor_id: The ID of the motor.
+        NOTE: you need to specify the motor id as the CAN identifier 
+        since it's not used in the message body
 
     Returns:
         The respective motor speed.
@@ -181,9 +183,8 @@ def get_motor_speed(motor_id: int) -> List[int]:
 
 def get_motor_current() -> List[int]:
     """Gets the motor Position of a respective motor.
-
-    Args:
-        motor_id: The ID of the motor.
+        NOTE: you need to specify the motor id as the CAN identifier 
+        since it's not used in the message body
 
     Returns:
         The respective motor current draw
@@ -197,9 +198,8 @@ def get_motor_current() -> List[int]:
 
 def get_motor_power() -> List[int]:
     """Gets power consumption of a respective motor.
-
-    Args:
-        motor_id: The ID of the motor.
+        NOTE: you need to specify the motor id as the CAN identifier 
+        since it's not used in the message body
 
     Returns:
         The respective motor power consumption
@@ -218,6 +218,8 @@ def get_motor_power() -> List[int]:
 
 def force_position_hybrid_control(kp: float, kd: float, position: float, speed: float, torque_ff: int) -> List[int]:
     """Gets the command to set the position of a motor using PD control. Expect 8 bytes.
+        NOTE: you need to specify the motor id as the CAN identifier 
+        since it's not used in the message body
 
     Args:
         kp: The proportional gain. No load default is 15
