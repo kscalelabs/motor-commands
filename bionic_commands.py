@@ -48,7 +48,6 @@ def set_position_control(
         since it's not used in the message body
 
     Args:
-        motor_id: The ID of the motor.
         motor_mode: 0x1 for servo position control.
         position: The position to set the motor to.
         max_speed: The maximum speed of the motor, in rotations per minute.
@@ -78,7 +77,6 @@ def set_speed_control(
         since it's not used in the message body
 
     Args:
-        motor_id: The ID of the motor.
         motor_mode: 0x2 for speed control.
         speed: The speed to set the motor to, in rotations per minute.
         current: The current of the motor, in amps. 0 to 65536 corresponds to 0 to 6553.6 A.
@@ -107,7 +105,6 @@ def set_current_torque_control(
         since it's not used in the message body
 
     Args:
-        motor_id: The ID of the motor.
         motor_mode: 0x3 for current control.
         value: The current (A) or torque (N*m) to set the motor to, x10. (int16, not uint16)
         message_return: The message return status.
